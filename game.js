@@ -43,7 +43,7 @@ startGame = () => {
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
-    console.log(availableQuestions);
+    //console.log(availableQuestions);
     getNewQuestion();
 };
 
@@ -78,8 +78,35 @@ choices.forEach(choice => {
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset["number"];
-        console.log(selectedAnswer);
-        getNewQuestion();
+        //console.log(selectedAnswer);
+
+        //print on the console the selected answer is true
+        //console.log(selectedAnswer == currentQuestion.answer);
+
+        /*
+        let classToApply = 'incorrect';
+        if(selectedAnswer == currentQuestion.answer) {
+            classToApply = 'correct';
+        }
+        */
+
+        const classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
+
+        //adding the color to the selected answer
+        selectedChoice.parentElement.classList.add(classToApply);
+
+        //set time out to shwo the color of the selected answer
+        setTimeout(() => {
+            //removing the previously added selected answer item
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
+
+        }, 1000);
+
+        
+        console.log(classToApply);
+
+        //getNewQuestion();
     });
 });
 

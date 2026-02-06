@@ -36,3 +36,11 @@ h2{
     margin: 0;
     width: 100%;
 }
+
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
