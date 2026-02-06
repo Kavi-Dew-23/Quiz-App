@@ -38,9 +38,9 @@ h2{
 }
 
 .correct {
-    background-color: green;
+    background-color: #33cc33;
 }
 
 .incorrect {
-    background-color: red;
+    background-color: #ff3333;
 }
