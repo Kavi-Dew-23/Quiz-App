@@ -44,3 +44,18 @@ h2{
 .incorrect {
     background-color: #ff3333;
 }
+
+/*head bar styling */
+#head-display {
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-display-prefix{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.head-display-main-text{
+    text-align: center;
+}

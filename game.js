@@ -1,6 +1,10 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 
+//add a question counter
+const questionCounterText = document.getElementById("questionCounter");
+const scoreText = document.getElementById('score');
+
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -55,6 +59,11 @@ getNewQuestion = () => {
     }
 
     questionCounter++;
+
+    //which question is in out of all questions
+    //questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
+    questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
+
     const questionIndex = Math.floor(Math.random() * availableQuestions.length); // get randon questions from the given array with length of 3 questions
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;     //get the inner text in the question
@@ -92,6 +101,10 @@ choices.forEach(choice => {
 
         const classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
 
+        if(classToApply === 'correct'){
+            incrementScore(CORRECT_BONUS);
+        }
+
         //adding the color to the selected answer
         selectedChoice.parentElement.classList.add(classToApply);
 
@@ -110,5 +123,10 @@ choices.forEach(choice => {
     });
 });
 
+//if the user answered correctly increment the score
+incrementScore = num => {
+    score += num;
+    scoreText.innerText = score;
+};
 
 startGame();
