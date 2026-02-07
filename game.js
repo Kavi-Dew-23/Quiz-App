@@ -2,8 +2,12 @@ const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 
 //add a question counter
-const questionCounterText = document.getElementById("questionCounter");
+//const questionCounterText = document.getElementById("questionCounter");
+const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById('score');
+
+//adding a progress bar
+const progressBarFull = document.getElementById('progressBarFull');
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -62,7 +66,11 @@ getNewQuestion = () => {
 
     //which question is in out of all questions
     //questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
-    questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
+    progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
+    
+    //update the progress bar
+    // console.log((questionCounter / MAX_QUESTIONS) * 100);
+    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
     const questionIndex = Math.floor(Math.random() * availableQuestions.length); // get randon questions from the given array with length of 3 questions
     currentQuestion = availableQuestions[questionIndex];

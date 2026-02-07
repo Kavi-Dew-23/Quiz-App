@@ -59,3 +59,16 @@ h2{
 .head-display-main-text{
     text-align: center;
 }
+
+#progressBar{
+    width: 20rem;
+    height: 4rem;
+    border: 0.3rem solid #56a5eb;
+    margin-top: 1.5rem;
+}
+
+#progressBarFull{
+    height: 3.8rem;
+    background-color: #56a5eb;
+    width: 0%;
+}
