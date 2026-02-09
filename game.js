@@ -58,6 +58,8 @@ startGame = () => {
 getNewQuestion = () => {
 
     if(availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+        //save the score in the local storage so that end screen can display it
+        localStorage.setItem('mostRecentScore', score);
         //after there is no questions in the array
         return window.location.assign("/end.html");
     }
