@@ -9,6 +9,11 @@ const scoreText = document.getElementById('score');
 //adding a progress bar
 const progressBarFull = document.getElementById('progressBarFull');
 
+//set the game to load
+const loader = document.getElementById('loader');
+const game = document.getElementById('game');
+
+
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -43,6 +48,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=hard&type=mu
 
         return formattedQuestion;
     });
+    
     startGame();
     //questions = loadedQuestions;
     //startGame();
@@ -61,6 +67,9 @@ startGame = () => {
     availableQuestions = [...questions];
     //console.log(availableQuestions);
     getNewQuestion();
+    game.classList.remove("hidden"); //show the hidden content in the game
+    loader.classList.add("hidden");  //hide the loader
+    
 };
 
 getNewQuestion = () => {
