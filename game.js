@@ -18,13 +18,34 @@ let availableQuestions = [];
 let questions = [];
 
 //use fetch API to go out and fetch the questions
-fetch("questions.json").then(res => {
+fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=hard&type=multiple").then(res => {
     //console.log(res);
     return res.json();
 }).then(loadedQuestions => {
-    console.log(loadedQuestions);
-    questions = loadedQuestions;
+    console.log(loadedQuestions.results);
+    questions = loadedQuestions.results.map(loadedQuestions => {
+        const formattedQuestion = {
+            question: loadedQuestions.question
+        };
+        
+        const answerChoices = [ ...loadedQuestions.incorrect_answers];
+        
+        //put the correct answer in the random position
+        formattedQuestion.answer = Math.floor(Math.random() * 3) +1; //give the random index between 0 to 3
+
+        // puth that answer into the answer choices array in the right spot
+        answerChoices.splice(formattedQuestion.answer - 1, 0, 
+            loadedQuestions.correct_answer);  //answer choices have all answers with correct answer with them
+            
+        answerChoices.forEach((choice, index) => {
+            formattedQuestion["choice" + (index + 1)] = choice;
+        });
+
+        return formattedQuestion;
+    });
     startGame();
+    //questions = loadedQuestions;
+    //startGame();
 }).catch(err => {
     console.error(err);
 });
@@ -32,7 +53,7 @@ fetch("questions.json").then(res => {
 //Create Constants
 
 const CORRECT_BONUS = 10; // How much the correct answer is worth
-const MAX_QUESTIONS = 3; // how many questions user get 
+const MAX_QUESTIONS = 10; // how many questions user get 
 
 startGame = () => {
     questionCounter = 0;
